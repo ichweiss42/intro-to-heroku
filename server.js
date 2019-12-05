@@ -20,9 +20,9 @@ if (process.env.DATABASE_URL !== undefined) {
 var client = new pg.Client(connectionString);
 client.connect();
 
-var propertyTable = 'property__c';
-var favoriteTable = 'favorite__c';
-var brokerTable = 'broker__c';
+var propertyTable = 'property__x';
+var favoriteTable = 'favorite__x';
+var brokerTable = 'broker__x';
 
 // setup the demo data if needed
 client.query('SELECT * FROM salesforce.broker__c', function(error, data) {
@@ -37,9 +37,9 @@ client.query('SELECT * FROM salesforce.broker__c', function(error, data) {
   }
   else {
     var schema = 'salesforce.';
-    propertyTable = schema + 'property__c';
-    favoriteTable = schema + 'favorite__c';
-    brokerTable = schema + 'broker__c';
+    propertyTable = schema + 'property__x';
+    favoriteTable = schema + 'favorite__x';
+    brokerTable = schema + 'broker__x';
   }
 });
 
