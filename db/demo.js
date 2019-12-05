@@ -1,4 +1,4 @@
-module.exports = function(client) {
+module.exports = function(client)  {
 
   client.query(`CREATE TABLE broker__x (
    id SERIAL NOT NULL,
