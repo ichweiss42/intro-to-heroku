@@ -25,9 +25,9 @@ var favoriteTable = 'favorite__x';
 var brokerTable = 'broker__x';
 
 // setup the demo data if needed
-client.query('SELECT * FROM salesforce.broker__c', function(error, data) {
+client.query('SELECT * FROM salesforce.broker__x', function(error, data) {
   if (error !== null) {
-    client.query('SELECT * FROM broker__c', function(error, data) {
+    client.query('SELECT * FROM broker__x', function(error, data) {
       if (error !== null) {
         console.log('Loading Demo Data...');
         require('./db/demo.js')(client);
@@ -51,20 +51,20 @@ app.get('/property', function(req, res) {
 });
 
 app.get('/property/:id', function(req, res) {
-  client.query('SELECT ' + propertyTable + '.*, ' + brokerTable + '.sfid AS broker__c_sfid, ' + brokerTable + '.name AS broker__c_name, ' + brokerTable + '.email__c AS broker__c_email__c, ' + brokerTable + '.phone__c AS broker__c_phone__c, ' + brokerTable + '.mobile_phone__c AS broker__c_mobile_phone__c, ' + brokerTable + '.title__c AS broker__c_title__c, ' + brokerTable + '.picture__c AS broker__c_picture__c FROM ' + propertyTable + ' INNER JOIN ' + brokerTable + ' ON ' + propertyTable + '.broker__c = ' + brokerTable + '.sfid WHERE ' + propertyTable + '.sfid = $1', [req.params.id], function(error, data) {
+  client.query('SELECT ' + propertyTable + '.*, ' + brokerTable + '.sfid AS broker__x_sfid, ' + brokerTable + '.name AS broker__x_name, ' + brokerTable + '.email__c AS broker__x_email__c, ' + brokerTable + '.phone__c AS broker__x_phone__c, ' + brokerTable + '.mobile_phone__c AS broker__x_mobile_phone__c, ' + brokerTable + '.title__c AS broker__x_title__c, ' + brokerTable + '.picture__c AS broker__x_picture__c FROM ' + propertyTable + ' INNER JOIN ' + brokerTable + ' ON ' + propertyTable + '.broker__x = ' + brokerTable + '.sfid WHERE ' + propertyTable + '.sfid = $1', [req.params.id], function(error, data) {
     res.json(data.rows[0]);
   });
 });
 
 
 app.get('/favorite', function(req, res) {
-  client.query('SELECT ' + propertyTable + '.*, ' + favoriteTable + '.sfid AS favorite__c_sfid FROM ' + propertyTable + ', ' + favoriteTable + ' WHERE ' + propertyTable + '.sfid = ' + favoriteTable + '.property__c', function(error, data) {
+  client.query('SELECT ' + propertyTable + '.*, ' + favoriteTable + '.sfid AS favorite__x_sfid FROM ' + propertyTable + ', ' + favoriteTable + ' WHERE ' + propertyTable + '.sfid = ' + favoriteTable + '.property__x', function(error, data) {
     res.json(data.rows);
   });
 });
 
 app.post('/favorite', function(req, res) {
-  client.query('INSERT INTO ' + favoriteTable + ' (property__c) VALUES ($1)', [req.body.property__c], function(error, data) {
+  client.query('INSERT INTO ' + favoriteTable + ' (property__x) VALUES ($1)', [req.body.property__x], function(error, data) {
     res.json(data);
   });
 });
